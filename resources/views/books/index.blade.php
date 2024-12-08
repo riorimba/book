@@ -24,14 +24,14 @@
                                     <tr>
                                         <td class="text-center">{{ $books->firstItem() + $loop->index }}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('storage/' . $book->cover_image) }}" class="rounded" style="width: 150px">
+                                        <img src="{{ asset($book->cover_image) }}" class="rounded" style="width: 150px">
                                         </td>
                                         <td>{{ $book->name }}</td>
                                         <td>{{ $book->author }}</td>
                                         <td>{{ $book->is_published ? 'Published' : 'Not Published' }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('books.show', $book->id) }}" class="btn btn-sm btn-dark"><i class="fa fa-eye"></i></a>
-                                            <a href="" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                            <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
 
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="" method="POST">
                                                 @csrf
