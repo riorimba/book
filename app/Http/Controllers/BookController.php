@@ -38,22 +38,15 @@ class BookController extends Controller
         return to_route('books.index')->with('success', 'Book created successfully');
     }
 
-    public function show($id)
-    {
-        $book = Book::find($id);
-
+    public function show(Book $book){
         return view('books.show', compact('book'));
     }
 
-    public function edit($id)
-    {
-        $book = Book::find($id);
-
+    public function edit(Book $book){
         return view('books.edit', compact('book'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, Book $book){
         $validatedData = $request->validate([
             'cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'name' => ['required', 'string', 'max:255'],
@@ -62,7 +55,7 @@ class BookController extends Controller
             'is_published' => ['required', 'boolean'],
         ]);
 
-        $book = Book::find($id);
+        // $book = Book::find($id);
 
         if ($request->hasFile('cover_image')) {
             // delete old image
@@ -79,9 +72,8 @@ class BookController extends Controller
         return to_route('books.index')->with('success', 'Book updated successfully');
     }
 
-    public function destroy($id)
-    {
-        $book = Book::find($id);
+    public function destroy(Book $book){
+        // $book = Book::find($id);
 
         // delete image
         Storage::delete('images/' . $book->cover_image);
