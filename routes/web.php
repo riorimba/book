@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,14 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/dashboard');
+
+Route::get('/register', [AuthenticationController::class, 'register'])->name('register');
+Route::post('/store', [AuthenticationController::class, 'store'])->name('store');
+Route::get('/login', [AuthenticationController::class, 'login'])->name('login');
+Route::post('/authenticate', [AuthenticationController::class, 'authenticate'])->name('authenticate');
+Route::get('/dashboard', [AuthenticationController::class, 'dashboard'])->name('dashboard');
+Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
 
 Route::resource('books', BookController::class);
