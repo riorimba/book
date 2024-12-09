@@ -23,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('books', BookController::class);
 
+
 Route::post('register', [AuthenticationController::class, 'register']);
+Route::post('login', [AuthenticationController::class, 'login']);
